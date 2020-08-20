@@ -73,7 +73,7 @@ while 1:
 		plt.show()
 		mng = plt.get_current_fig_manager()
 		#mng.window.showMaximized()
-		mng.window.state("normal")
+		#mng.window.state("normal")
 		print("Pausing 10 sec...")	
 		plt.pause(10)
 		plt.close('all')
