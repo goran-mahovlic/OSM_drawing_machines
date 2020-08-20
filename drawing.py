@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 
 base = pyplot.gca().transData
-cities = ["Općina Fužine","Vukovar", "Grad Ogulin","Grad Delnice","Knin", "Grad Sisak" ,"Grad Zaprešić", "Berlin","New York", "London","Petrinja", "Zagreb", "Karlovac", "Split", "Varaždin", "Čakovec", "Koprivnica", "Lipine", "Garešnica"]
+cities = ["Vukovar", "Grad Ogulin","Grad Delnice","Knin", "Grad Sisak" ,"Grad Zaprešić", "Berlin","New York", "London","Petrinja", "Zagreb", "Karlovac", "Split", "Varaždin", "Čakovec", "Koprivnica", "Lipine", "Garešnica"]
 
 while 1:
 	numCity = [] 
@@ -69,10 +69,11 @@ while 1:
 	img = cv2.imread('generated.png', cv2.IMREAD_GRAYSCALE)
 	n_white_pix = np.sum(img == 255)
 	print('Number of white pixels:', n_white_pix)
-	if n_white_pix > 170000 and n_white_pix < 180000:
+	if n_white_pix > 100000 and n_white_pix < 300000:
 		plt.show()
 		mng = plt.get_current_fig_manager()
-		mng.window.showMaximized()
-		print("Pausing 3 sec...")	
-		plt.pause(60)
+		#mng.window.showMaximized()
+		mng.window.state("normal")
+		print("Pausing 10 sec...")	
+		plt.pause(10)
 		plt.close('all')
