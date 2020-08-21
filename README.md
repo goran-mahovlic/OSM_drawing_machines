@@ -12,6 +12,10 @@ Show random water surfaces from random cities (currently from list) on random lo
 
 Random picture you can get from this code
 
+Sample1
+
 ![Sample1](https://github.com/goran-mahovlic/OSM_drawing_machines/blob/master/pic/Figure_1.png)
+
+Sample2
 
 ![Sample2](https://github.com/goran-mahovlic/OSM_drawing_machines/blob/master/pic/Figure_2.png)
