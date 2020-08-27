@@ -4,7 +4,7 @@ OpenStreetMap art drawing project
 
 Project was done at Electric Wonderland camp
 
-Authors: Goran Mahovlić, Igor Brkić, Ana Horvat, Paula Bučar, Mark Bilandžić, Jurica Zrna, Tomislav Mikić
+Authors: Goran Mahovlić, Igor Brkić, Ana Horvat, Paula Bučar, Mark Bilandžić, Jurica Zrna, Laura Abramović, Tomislav Mikić
 
 How it works?
  
