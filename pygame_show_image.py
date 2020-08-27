@@ -61,6 +61,7 @@ while True:
         for city in numCity:
             # Print each used city
             print(city)
+            pygame.time.wait(100)
             try:
                 areaUsed = Nominatim().query(city)
                 # Query openstreetmap for all water surfaces in given area
@@ -69,7 +70,7 @@ while True:
                 # For all water surfaces in Cities
                 for waters in result.elements():
                     # Give object 1% of chance to be draw
-                    if random.randint(0,100) > 1:
+                    if random.randint(0,100) <=10:
                         continue
                     try:
                         # Add water poligon to map
@@ -173,6 +174,7 @@ while True:
         screen.blit(img_four,(img_resize_x,img_resize_y))
 
         pygame.display.update()
+        pygame.time.wait(10000)
         pic_ready = False
 
 #    except:
