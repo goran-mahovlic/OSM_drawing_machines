@@ -14,7 +14,7 @@ import numpy as np
 import cv2
 
 #Selecting few cities we want to get water surface from
-cities = ["Grad Ogulin","Grad Delnice","Grad Zaprešić", "Petrinja", "Zagreb", "Karlovac"]
+cities = ["Grad Ogulin","Grad Delnice","Petrinja", "Zagreb", "Karlovac"]
 
 while 1:
 	numCity = []
@@ -47,25 +47,26 @@ while 1:
 				# For all water surfaces in Cities
 				for waters in result.elements():
 					# Give object 2% of chance to be draw
-					if random.randint(0,100) > 98:
+					if random.randint(0,100) > 50:
 						continue
-					try:
-						# Add water poligon to map
-						datastring = waters.geometry()
-						x = [xx[0] for xx in datastring.coordinates[0]]
-						y = [xx[1] for xx in datastring.coordinates[0]]
-						xc = sum(x)/len(x)+random.random()/rndNear
-						yc = sum(y)/len(y)+random.random()/rndNear
-						x = [xx-xc for xx in x]
-						y = [yy-yc for yy in y]
-						# Add object rotation
-						rot = transforms.Affine2D().rotate_deg(random.randint(0,rndRotation))
-						# Cut random sizes
-						if (len(x) < rndRivers and len(y) < rndRivers):
-							# Plot each poligon with random line width
-							plt.plot(x, y,linewidth=random.randint(1,7), transform = rot + base)
-					except:
-						pass
+					else:
+						try:
+							# Add water poligon to map
+							datastring = waters.geometry()
+							x = [xx[0] for xx in datastring.coordinates[0]]
+							y = [xx[1] for xx in datastring.coordinates[0]]
+							xc = sum(x)/len(x)+random.random()/rndNear
+							yc = sum(y)/len(y)+random.random()/rndNear
+							x = [xx-xc for xx in x]
+							y = [yy-yc for yy in y]
+							# Add object rotation
+							rot = transforms.Affine2D().rotate_deg(random.randint(0,rndRotation))
+							# Cut random sizes
+							if (len(x) < rndRivers and len(y) < rndRivers):
+								# Plot each poligon with random line width
+								plt.plot(x, y,linewidth=random.randint(1,7), transform = rot + base)
+						except:
+							pass
 			except ZeroDivisionError:
 				pass
 	# Get min and max graph
@@ -93,7 +94,7 @@ while 1:
 	n_white_pix = np.sum(img == 255)
 	print('Number of white pixels:', n_white_pix)
 	# What number of white is accepted
-	if n_white_pix > 100000 and n_white_pix < 200000:
+	if n_white_pix > 140000 and n_white_pix < 2000000:
 		# Show graph
 		plt.show()
 		mng = plt.get_current_fig_manager()
@@ -101,6 +102,6 @@ while 1:
 		#mng.window.showMaximized()
 		#mng.window.state("normal")
 		# Pause to check picture
-		print("Pausing 10 sec...")
-		plt.pause(10)
+		print("Pausing 1 sec...")
+		plt.pause(1)
 		plt.close('all')

@@ -29,12 +29,12 @@ pic_ready = False
 pic_generated = False
 
 "Set screen"
-#screen = pygame.display.set_mode((screen_size_x,screen_size_y),0,32)
-screen = pygame.display.set_mode((screen_size_x,screen_size_y),pygame.FULLSCREEN)
+screen = pygame.display.set_mode((screen_size_x,screen_size_y),0,32)
+#screen = pygame.display.set_mode((screen_size_x,screen_size_y),pygame.FULLSCREEN)
 
 base = pyplot.gca().transData
 #Selecting few cities we want to get water surface from
-cities = ["Grad Ogulin","Grad Delnice", "Grad Sisak" ,"Grad Zaprešić" ,"Petrinja", "Zagreb", "Karlovac", "Varaždin", "Lipine", "Garešnica"]
+cities = ["Grad Ogulin","Grad Delnice", "Grad Sisak"]
 
 while True:
 	for evt in pygame.event.get():
@@ -76,33 +76,34 @@ while True:
 				result = Overpass().query(query)
 				# For all water surfaces in Cities
 				for waters in result.elements():
-					# Give object 1% of chance to be draw
-					if random.randint(0,100) <= 10:
+					# Give object 2% of chance to be draw
+					if random.randint(0,100) > 50:
 						continue
-					try:
-						# Add water poligon to map
-						datastring = waters.geometry()
-						x = [xx[0] for xx in datastring.coordinates[0]]
-						y = [xx[1] for xx in datastring.coordinates[0]]
-						xc = sum(x)/len(x)+random.random()/rndNear
-						yc = sum(y)/len(y)+random.random()/rndNear
-						x = [xx-xc for xx in x]
-						y = [yy-yc for yy in y]
-						# Add object rotation
-						rot = transforms.Affine2D().rotate_deg(random.randint(0,rndRotation))
-						# Cut random sizes
-						if (len(x) < rndRivers and len(y) < rndRivers):
-							# Plot each poligon with random line width
-							if pic_generated:
-								pic_generated = False
-							else:
-								plt.plot(x, y,linewidth=random.randint(1,7), transform = rot + base)
-								print("Picture ready")
-								#pic_ready = True
-					except:
-						pic_ready = False
-						print("except Picture false")
-						pass
+					else:
+						try:
+							# Add water poligon to map
+							datastring = waters.geometry()
+							x = [xx[0] for xx in datastring.coordinates[0]]
+							y = [xx[1] for xx in datastring.coordinates[0]]
+							xc = sum(x)/len(x)+random.random()/rndNear
+							yc = sum(y)/len(y)+random.random()/rndNear
+							x = [xx-xc for xx in x]
+							y = [yy-yc for yy in y]
+							# Add object rotation
+							rot = transforms.Affine2D().rotate_deg(random.randint(0,rndRotation))
+							# Cut random sizes
+							if (len(x) < rndRivers and len(y) < rndRivers):
+								# Plot each poligon with random line width
+								if pic_generated:
+									pic_generated = False
+								else:
+									plt.plot(x, y,linewidth=random.randint(1,7), transform = rot + base)
+									print("Picture ready")
+									#pic_ready = True
+						except:
+							pic_ready = False
+							print("except Picture false")
+							pass
 					print("Picture ready2")	
 			except ZeroDivisionError:
 				pic_ready = False
@@ -137,7 +138,7 @@ while True:
 		n_white_pix = np.sum(img == 255)
 		print('Number of white pixels:', n_white_pix)
 		# What number of white is accepted
-		if n_white_pix > 100000 and n_white_pix < 200000:
+		if n_white_pix > 100000 and n_white_pix < 2000000:
 			# Show graph
 			#plt.show()
 			#plt.figure(dpi=300)
@@ -199,7 +200,7 @@ while True:
 		screen.blit(img_four,(img_resize_x,img_resize_y))
 
 		pygame.display.update()
-		pygame.time.wait(10000)
+		pygame.time.wait(1000)
 		pic_ready = False
 
 #    except:
